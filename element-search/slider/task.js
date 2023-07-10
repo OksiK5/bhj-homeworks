@@ -3,18 +3,20 @@ const prevButton = document.querySelector('.slider__arrow_prev');
 const nextButton = document.querySelector('.slider__arrow_next');
 const dots = document.querySelectorAll('.slider__dot');
 
-let currentSlideIndex = 0;
+function getCurrentSlideIndex() {
+	return Array.from(sliderItems).findIndex(item => item.classList.contains('slider__item_active'));
+}
 
 function setActiveSlide(index) {
-	sliderItems[currentSlideIndex].classList.remove('slider__item_active');
-	dots[currentSlideIndex].classList.remove('slider__dot_active');
-	currentSlideIndex = index;
-	sliderItems[currentSlideIndex].classList.add('slider__item_active');
-	dots[currentSlideIndex].classList.add('slider__dot_active');
+	let slideIndex = getCurrentSlideIndex();
+	sliderItems[slideIndex].classList.remove('slider__item_active');
+	dots[slideIndex].classList.remove('slider__dot_active');
+	sliderItems[index].classList.add('slider__item_active');
+	dots[index].classList.add('slider__dot_active');
 }
 
 prevButton.addEventListener('click', () => {
-	let newIndex = currentSlideIndex - 1;
+	let newIndex = getCurrentSlideIndex() - 1;
 	if (newIndex < 0) {
 		newIndex = sliderItems.length - 1;
 	}
@@ -22,7 +24,7 @@ prevButton.addEventListener('click', () => {
 });
 
 nextButton.addEventListener('click', () => {
-	let newIndex = currentSlideIndex + 1;
+	let newIndex = getCurrentSlideIndex() + 1;
 	if (newIndex >= sliderItems.length) {
 		newIndex = 0;
 	}
