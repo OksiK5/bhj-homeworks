@@ -5,7 +5,7 @@ const signin = document.getElementById('signin');
 
 if (localStorage.getItem('user_id')) {
     welcome.classList.add('welcome_active');
-    userId.textConten = localStorage.getItem('user_id');
+    userId.textContent = localStorage.getItem('user_id');
 } else {
     signin.classList.add('signin_active');
 }
