@@ -1,5 +1,14 @@
 const signinForm = document.getElementById('signin__form');
 const welcome = document.getElementById('welcome');
+const userId = document.getElementById('user_id');
+const signin = document.getElementById('signin');
+
+if (localStorage.getItem('userId')) {
+    welcome.classList.add('welcome_active');
+    userId.innerText = localStorage.getItem('userId');
+    } else {
+        signin.classList.add('signin_active');
+}
 
 signinForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -21,8 +30,8 @@ signinForm.addEventListener('submit', (e) => {
             const response = JSON.parse(xhr.responseText);
             if (response.success) {
                 localStorage.setItem('user_id', response.user_id);
-                document.getElementById('signin').classList.remove('signin_active');
-                document.getElementById('user_id').textContent = response.user_id;
+                signin.classList.remove('signin_active');
+                userId.textContent = response.user_id;
                 welcome.classList.add('welcome_active');
             } else {
                 alert('Неверный логин/пароль');
@@ -37,6 +46,6 @@ const logoutBtn = document.getElementById('logout__btn');
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('user_id');
     welcome.classList.remove('welcome_active');
-    document.getElementById('signin').classList.add('signin_active');
-    document.getElementById('signin__form').reset();
+    signin.classList.add('signin_active');
+    signinForm.reset();
 });
