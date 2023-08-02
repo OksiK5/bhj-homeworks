@@ -3,11 +3,11 @@ const welcome = document.getElementById('welcome');
 const userId = document.getElementById('user_id');
 const signin = document.getElementById('signin');
 
-if (localStorage.getItem('userId')) {
+if (localStorage.getItem('user_id')) {
     welcome.classList.add('welcome_active');
-    userId.innerText = localStorage.getItem('userId');
-    } else {
-        signin.classList.add('signin_active');
+    userId.textConten = localStorage.getItem('user_id');
+} else {
+    signin.classList.add('signin_active');
 }
 
 signinForm.addEventListener('submit', (e) => {
@@ -17,11 +17,11 @@ signinForm.addEventListener('submit', (e) => {
     if (!signinForm.login.value) {
         alert('Логин не может быть пустым');
         return;
-    };
+    }
     if (!signinForm.password.value) {
         alert('Пароль не может быть пустым');
         return;
-    }; 
+    }
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/auth');
